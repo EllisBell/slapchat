@@ -26,9 +26,6 @@ chatSocket.onmessage = function(e) {
 
 chatSocket.onclose = function(e) {
     console.error('Chat socket closed unexpectedly');
-    chatSocket.send(JSON.stringify({
-        'message': userName + " has left the room"
-    }));
 };
 
 document.querySelector('#chat-message-input').focus();
@@ -59,7 +56,8 @@ var getImage = function(robinText, batmanText) {
         // Success!
         //var data = JSON.parse(request.responseText);
         var data = request.responseText;
-        document.querySelector('#chat-log').innerHTML = ("<div><img src='data:image/gif;base64," + data + "'/></div>");
+        setImage(data);
+        //document.querySelector('#chat-log1').innerHTML = ("<div><img src='data:image/gif;base64," + data + "'/></div>");
     } else {
         // We reached our target server, but it returned an error
 
@@ -74,23 +72,44 @@ var getImage = function(robinText, batmanText) {
 }
 
 
-document.querySelector('#username-input').focus();
-document.querySelector('#username-input').onkeyup = function(e) {
-    if (e.keyCode === 13) {  // enter, return
-        document.querySelector('#username-submit').click();
+//document.querySelector('#username-input').focus();
+// document.querySelector('#username-input').onkeyup = function(e) {
+//     if (e.keyCode === 13) {  // enter, return
+//         document.querySelector('#username-submit').click();
+//     }
+// };
+
+// document.querySelector('#username-submit').onclick = function(e) {
+//     userName = document.querySelector('#username-input').value;
+//     document.querySelector('#username-div').setAttribute("style", "display: none");
+//     // document.querySelector('#username-display').textContent = "your username is " + userName;
+//     chatSocket.send(JSON.stringify({
+//         'message': userName + " has joined the room"
+//     }));
+// };
+
+var setImage = function(data) {
+    // check if 1 is populated yet
+    var chatLog1 = document.querySelector('#chat-log1');
+    var chatLog2 = document.querySelector('#chat-log2');
+    var chatLog3 = document.querySelector('#chat-log3');
+    var imgHtml = "<div><img src='data:image/gif;base64," + data + "'/></div>"
+    // If nothing there yet, fill up first square
+    if(chatLog1.innerHTML === "" || (chatLog2.innerHTML === "" && robinTalking)) {
+        chatLog1.innerHTML = imgHtml;
     }
-};
-
-document.querySelector('#username-submit').onclick = function(e) {
-    userName = document.querySelector('#username-input').value;
-    document.querySelector('#username-div').setAttribute("style", "display: none");
-    document.querySelector('#username-display').textContent = "your username is " + userName;
-    chatSocket.send(JSON.stringify({
-        'message': userName + " has joined the room"
-    }));
-};
-
-// when chat is image
-// go to websocket, and send back django endpoint
-// call ajax to get image from django endpoint
-// first build endpoint
+    // Otherwise fill up second square
+    else if(chatLog2.innerHTML === "" || (chatLog3.innerHTML === "" && robinTalking)) {
+        chatLog2.innerHTML = imgHtml;
+    }
+    // Otherwise fill up third square
+    else if(chatLog3.innerHTML === "" || robinTalking) {
+        chatLog3.innerHTML = imgHtml;
+    }
+    // All are full, start replacing with new images and rotating back
+    else {
+        chatLog1.innerHTML = chatLog2.innerHTML;
+        chatLog2.innerHTML = chatLog3.innerHTML;
+        chatLog3.innerHTML = imgHtml;
+    }    
+}

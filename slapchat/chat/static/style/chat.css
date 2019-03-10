@@ -1,0 +1,78 @@
+html {
+    background-color: #646EC8;
+}
+
+#container {
+    width: 90%;
+    height: 100%;
+    margin: 0 auto;
+}
+
+#inner-container {
+    width: 100%;
+    height: 100%;
+}
+
+/* #header {
+   display: table;
+   margin: 0 auto;
+   border: 1px solid green;
+} */
+
+#header-container {
+    display: flex;
+    justify-content: center;
+    font-family: 'Bangers', cursive;
+    font-size: 8rem;
+    color: #fde311;
+    -webkit-text-stroke-width: 3px;
+    -webkit-text-stroke-color: black;
+    /* margin-bottom: 20px; */
+}
+
+#chat-container {
+    display: flex;
+    justify-content: center;
+    height: 400px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+.chat-log {
+    display: inline-block;
+}
+
+#chat-input-container {
+    display: flex;
+    justify-content: center;
+}
+
+#prompt {
+    font-family: 'Bangers', cursive;
+    color: #fde311;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: black;
+}
+
+#chat-message-input {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border: none;
+    border-bottom: 2px solid black;
+    background-color: #646EC8;
+    font-size: 15px;
+    font-family: 'Bangers', cursive;
+}
+
+#chat-message-input:focus {
+    outline: none;
+    
+}
+
+#chat-message-submit {
+    float: right;
+    border: none;
+    background: white;
+    font-family: 'Bangers', cursive;
+    font-size: 20px;
+}
