@@ -1,4 +1,6 @@
 var userName;
+var robinTalking = true;
+var robinText = "";
 
 var chatSocket = new WebSocket(
     'ws://' + window.location.host +
@@ -11,14 +13,15 @@ chatSocket.onopen = function(e) {
 chatSocket.onmessage = function(e) {
     var data = JSON.parse(e.data);
     var message = data['message'];
-    if(message.indexOf('@meme') !== -1) {
-        var startIndex = message.indexOf('@meme') + '@meme'.length + 1; // +1 to account for space
-        var text = message.substring(startIndex, message.length);
-        getImage(text);
-    } 
-    else {
-        document.querySelector('#chat-log').innerHTML += ("<div>" + message + "</div>");
+    var itWasRobin = data['robin'];
+    if(itWasRobin) {
+        robinText = data["message"]
+        getImage(message, "")
     }
+    else {
+        getImage(robinText, message)
+    }
+    robinTalking = !itWasRobin;
 };
 
 chatSocket.onclose = function(e) {
@@ -40,22 +43,23 @@ document.querySelector('#chat-message-submit').onclick = function(e) {
     var message = messageInputDom.value;
 
     chatSocket.send(JSON.stringify({
-        'message': userName + ": " + message
+        'message': message,
+        'robin': robinTalking
     }));
 
     messageInputDom.value = '';
 };
 
-var getImage = function(text) {
+var getImage = function(robinText, batmanText) {
     var request = new XMLHttpRequest();
-    request.open('GET', 'chat/get_image?text=' + text, true);
+    request.open('GET', 'chat/get_image?robinText=' + robinText + '&batmanText=' + batmanText, true);
 
     request.onload = function() {
     if (request.status >= 200 && request.status < 400) {
         // Success!
         //var data = JSON.parse(request.responseText);
         var data = request.responseText;
-        document.querySelector('#chat-log').innerHTML += ("<div><img src='data:image/gif;base64," + data + "'/></div>");
+        document.querySelector('#chat-log').innerHTML = ("<div><img src='data:image/gif;base64," + data + "'/></div>");
     } else {
         // We reached our target server, but it returned an error
 

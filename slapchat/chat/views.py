@@ -24,10 +24,11 @@ def get_image(request):
     # Open image file, read in and encode as base64 so can use in AJAX call from client
     # with open('chat/' + static('img/batman.png'), "rb") as image_file:
     #     encoded_string = base64.b64encode(image_file.read())
-    text = request.GET['text']
-    print(text)
+    print(request.GET)
+    robin_text = request.GET['robinText']
+    batman_text = request.GET['batmanText']
     buffered = BytesIO()
-    img = mg.get_meme(text)
+    img = mg.get_meme(robin_text, batman_text)
     img.save(buffered, format="JPEG")
     encoded_string = base64.b64encode(buffered.getvalue())
     return HttpResponse(encoded_string, content_type="image/jpeg")
