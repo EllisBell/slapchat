@@ -2,8 +2,10 @@ var userName;
 var robinTalking = true;
 var robinText = "";
 
+var ws_scheme = window.location.protocol == "https:" ? "wss" : "ws";
+
 var chatSocket = new WebSocket(
-    'ws://' + window.location.host +
+    ws_scheme + '://' + window.location.host +
     '/ws/chat/');
 
 chatSocket.onopen = function(e) {
