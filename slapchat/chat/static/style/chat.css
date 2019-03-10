@@ -36,6 +36,7 @@ html {
     height: 400px;
     margin-bottom: 20px;
     margin-top: 20px;
+    overflow-y:auto;
 }
 
 .chat-log {

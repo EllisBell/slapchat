@@ -38,11 +38,12 @@ document.querySelector('#chat-message-input').onkeyup = function(e) {
 document.querySelector('#chat-message-submit').onclick = function(e) {
     var messageInputDom = document.querySelector('#chat-message-input');
     var message = messageInputDom.value;
-
-    chatSocket.send(JSON.stringify({
-        'message': message,
-        'robin': robinTalking
-    }));
+    if(message.trim() !== "") {
+        chatSocket.send(JSON.stringify({
+            'message': message,
+            'robin': robinTalking
+        }));
+    }
 
     messageInputDom.value = '';
 };
@@ -54,13 +55,10 @@ var getImage = function(robinText, batmanText) {
     request.onload = function() {
     if (request.status >= 200 && request.status < 400) {
         // Success!
-        //var data = JSON.parse(request.responseText);
         var data = request.responseText;
         setImage(data);
-        //document.querySelector('#chat-log1').innerHTML = ("<div><img src='data:image/gif;base64," + data + "'/></div>");
     } else {
         // We reached our target server, but it returned an error
-
     }
     };
 
