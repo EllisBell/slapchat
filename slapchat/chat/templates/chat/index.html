@@ -7,7 +7,6 @@
     <title>Chat Rooms</title>
 </head>
 <body>
-    <a href="">hello</a>
     <div id="username-div">
         <input id="username-input" type="text" size="100" placeholder="enter username"/><br/>
         <input id="username-submit" type="button" value="Enter"/>
@@ -16,7 +15,8 @@
 
     {% comment %} <textarea id="chat-log" cols="100" rows="20"></textarea><br/> {% endcomment %}
     <div id="chat-log"></div>
-    <input id="chat-message-input" type="text" size="100"/><br/>
+    <div>Type your message (max length 68 characters)</div>
+    <input id="chat-message-input" type="text" size="100"/ maxlength="68"><br/>
     <input id="chat-message-submit" type="button" value="Send"/>
     
 </body>
