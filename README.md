@@ -1,7 +1,9 @@
 # slapchat
 Messing around with websockets. Available (hopefully) [here](https://slapchatapp.herokuapp.com/chat/)
 
-A single-room chat website in which messages are displayed through the medium of the "Batman Slapping Robin" meme.
+A single-room chat website in which messages are displayed through the medium of the "Batman Slapping Robin" meme. Todo: make mobile-friendly.
+
+N.b. I don't think it is in any way scalable but fun to use with my gf.
 
 ### Get it running locally
 
