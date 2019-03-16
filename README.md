@@ -1,5 +1,5 @@
 # slapchat
-Messing around with websockets. Available (hopefully) [here](https://slapchatapp.herokuapp.com/chat/)
+Messing around with websockets. Available (hopefully) [here](https://slapchatapp.herokuapp.com)
 
 A single-room chat website in which messages are displayed through the medium of the "Batman Slapping Robin" meme. Todo: make mobile-friendly.
 
